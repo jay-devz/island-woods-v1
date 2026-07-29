@@ -5,7 +5,7 @@ Ok... so here are the things I plan to edit
 - FAVICON NOW!! ✅
 - more animations... roll in reveals etc
 - add whatsapp integrations
-- integrate scaffolding poster
+- integrate scaffolding poster✅
 - navbar dropdown menu doesn't work
 - comment out parts from menu that no longer exist like pricing
 - more colour contrast.. white sections kind of boring to look at. add sections similar to reviews section
@@ -18,6 +18,7 @@ Ok... so here are the things I plan to edit
 - maybe put trust section higher? 
 - make form actually work ✅
 - add tel:
+- STRONGER CTA FOR QUOTE REQUESTS
 
 **HERO**
 
@@ -74,17 +75,43 @@ Ok... so here are the things I plan to edit
 - point map embed to real location✅
 - make quote request form actually work ✅
 
-**ABOUT**
-- replace w real information
-- make stats into counters
-- maybe have image to the left instead of that weird tree thing
-- make staff cards have real staff names and initials
-- awards must have real names
-- make tree rings actually match years in business
-- make years be a counter
-- add animation to rings spreading out infinite
-
+**ABOUT**   1
+- replace w real information ✅
+- make stats into counters✅
+- maybe have image of staff smiling to the left instead of that weird tree thing❌
+- make staff cards have real staff names and initials ✅
+- awards must have real names ❌
+- make tree rings actually match years in business ❌
+- make years be a counter ✅
+- add animation to rings spreading out infinite✅
+  
 **FOOTER**
-- text must be accurate
-- real phone number and address
+- text must be accurate ✅
+- real phone number and address✅
+- real logo✅
+
+------WEBSITE PRESENTATION NOTES---------
+1. Real number of projects 
+2. Does client want logo marquee?
+3. Actual Steps for scaffolding RENTAL
+4. actual process for roofing membranes
+5. Does client want qote calculator?
+6. Does client want price ranges on site?
+7. Does client want booking calendar?
+8. Actual Construction process
+9. Real testimonials? I can do a campaign to generate that
+10. Any scaffolding job proof
+11. Does client want second page that's just a list of project photos?
+12. Thoughts on amount of page content
+13. System in place to manage quote requests?
+14. Is the address on google correct?
+15. Real data for about-stats
+16. Real awards & certifications received
+17. Real email address
+18. staff images
+19. project images.. as many as possible for each division
+20. project videos/drone footage
+21. are there brand guidelines? i worked with a colour scheme based on poster but is there a kit
+22. Thoughts on WhatsApp integration plan
+23. Does client acually serve all 14 parishes
 
