@@ -2,7 +2,7 @@ Ok... so here are the things I plan to edit
 
 
 **SITE-WIDE**
-- FAVICON NOW!!
+- FAVICON NOW!! ✅
 - more animations... roll in reveals etc
 - add whatsapp integrations
 - integrate scaffolding poster
@@ -16,8 +16,7 @@ Ok... so here are the things I plan to edit
 - a few rounded corners
 - vector images of cartoon people doing stuff... bonus points if animated
 - maybe put trust section higher? 
-- make form actually work
-- add mailto??
+- make form actually work ✅
 - add tel:
 
 **HERO**
