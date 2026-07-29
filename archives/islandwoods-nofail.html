@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Island Woods &amp; Development — Built in Jamaica, Built to Last</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest-950:#14171a;
+    --forest-900:#1c2126;
+    --forest-800:#2a3138;
+    --sage-500:#f2670c;
+    --sage-300:#ffb27a;
+    --cream-50:#f5f4f1;
+    --cream-100:#e9e7e1;
+    --wood-700:#3a424b;
+    --wood-800:#262b31;
+    --wood-900:#181b1f;
+    --ink-900:#1a1c1e;
+    --ink-600:#55595e;
+    --line:rgba(26,28,30,0.14);
+    --line-light:rgba(245,244,241,0.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--cream-50);
+    color:var(--ink-900);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+  .serif{font-family:'Oswald',sans-serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:0.03em;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--sage-500);
+    font-weight:500;
+  }
+  .eyebrow::before{
+    content:'';
+    width:26px;height:1px;
+    background:currentColor;
+    display:inline-block;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 26px;
+    border-radius:2px;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:all .25s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .btn svg{width:13px;height:13px;transition:transform .25s ease;}
+  .btn:hover svg{transform:translate(3px,-3px);}
+  .btn-primary{background:var(--sage-500);color:var(--forest-950);}
+  .btn-primary:hover{background:var(--sage-300);}
+  .btn-outline-light{border-color:var(--line-light);color:var(--cream-50);}
+  .btn-outline-light:hover{background:rgba(250,247,239,0.08);border-color:var(--cream-50);}
+  .btn-outline-dark{border-color:var(--line);color:var(--ink-900);}
+  .btn-outline-dark:hover{background:var(--ink-900);color:var(--cream-50);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:22px 0;
+    transition:background .3s ease, padding .3s ease, border-color .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(250,247,239,0.92);
+    backdrop-filter:blur(10px);
+    padding:14px 0;
+    border-color:var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark{width:38px;height:38px;flex-shrink:0;}
+  .brand-text{line-height:1.15;}
+  .brand-text .name{
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:16px;
+    letter-spacing:0.02em;color:var(--cream-50);
+  }
+  header.scrolled .brand-text .name{color:var(--ink-900);}
+  .brand-text .sub{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--sage-300);
+  }
+  header.scrolled .brand-text .sub{color:var(--forest-800);}
+  .nav-links{display:flex;gap:36px;list-style:none;}
+  .nav-links a{
+    font-size:13px;font-weight:500;letter-spacing:0.03em;text-transform:uppercase;
+    color:var(--cream-100);position:relative;padding-bottom:4px;
+  }
+  header.scrolled .nav-links a{color:var(--ink-900);}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--sage-500);
+    transition:width .25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:26px;}
+  .nav-cta .btn{padding:12px 20px;font-size:12px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      linear-gradient(120deg, rgba(20,23,26,0.88) 0%, rgba(20,23,26,0.55) 45%, rgba(20,23,26,0.25) 100%),
+      url('construction site image workers hero.png') center center / cover no-repeat;
+    color:var(--cream-50);
+    padding:170px 0 110px;
+    overflow:hidden;
+  }
+  .contour-field{position:absolute;inset:0;opacity:0.5;pointer-events:none;}
+  .hero-grid{
+    display:block;
+    position:relative;z-index:2;
+  }
+  .hero-eyebrow{margin-bottom:26px;}
+  .hero h1{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    text-transform:uppercase;
+    font-size:clamp(40px,4.8vw,68px);
+    line-height:1.04;
+    letter-spacing:0.01em;
+  }
+  .hero h1 em{font-style:normal;font-weight:700;color:var(--sage-500);}
+  .hero p.lede{
+    margin-top:26px;max-width:440px;font-size:16.5px;line-height:1.65;color:var(--cream-100);opacity:0.82;
+  }
+  .hero-actions{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;}
+  .hero-stats{
+    display:flex;gap:34px;margin-top:64px;padding-top:28px;border-top:1px solid var(--line-light);
+  }
+  .hero-stats div b{
+    display:block;font-family:'Oswald',sans-serif;font-size:26px;font-weight:500;color:var(--sage-300);
+  }
+  .hero-stats div span{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--cream-100);opacity:0.6;}
+
+  .hero-art{position:relative;height:520px;}
+  .ring-badge{
+    position:absolute;bottom:0;right:6%;width:150px;height:150px;
+    animation:spin 26s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .house-illustration{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:2px;
+}
+  /* ---------- MARQUEE ---------- */
+  .marquee-strip{
+    background:var(--cream-100);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:16px 0;overflow:hidden;white-space:nowrap;
+  }
+  .marquee-track{display:inline-flex;gap:48px;animation:scrollx 90s linear infinite;}
+  .marquee-track span{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--ink-600);display:inline-flex;align-items:center;gap:48px;
+  }
+  .marquee-track span::after{content:'◆';color:var(--sage-500);margin-left:48px;}
+  @keyframes scrollx{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:120px 0;}
+  .section-head{
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:70px;
+  }
+  .section-head h2{
+    font-family:'Oswald',sans-serif;font-weight:500;text-transform:uppercase;font-size:clamp(28px,3.2vw,44px);
+    line-height:1.1;margin-top:16px;letter-spacing:0.005em;
+  }
+  .section-head h2 em{font-style:normal;color:var(--sage-500);font-weight:700;}
+  .section-head p{font-size:15.5px;line-height:1.7;color:var(--ink-600);}
+
+  /* ---------- SERVICES (roman numeral staggered) ---------- */
+  .services-list{border-top:1px solid var(--line);}
+  .service-row{
+    display:grid;grid-template-columns:90px 1fr 1.4fr 40px;gap:30px;align-items:center;
+    padding:38px 0;border-bottom:1px solid var(--line);
+    transition:padding-left .3s ease, background .3s ease;
+    cursor:default;
+  }
+  .service-row:hover{padding-left:14px;background:rgba(147,168,106,0.06);}
+  .service-num{font-family:'Oswald',sans-serif;font-style:normal;font-weight:600;font-size:15px;color:var(--sage-500);}
+  .service-title{font-family:'Oswald',sans-serif;font-size:24px;font-weight:500;}
+  .service-desc{font-size:14.5px;line-height:1.6;color:var(--ink-600);max-width:480px;}
+  .service-arrow{width:16px;height:16px;color:var(--ink-600);transition:transform .3s ease;justify-self:end;}
+  .service-row:hover .service-arrow{transform:translate(4px,-4px);color:var(--sage-500);}
+
+  /* Service Card Base */
+  .service-card {
+    overflow: hidden; /* Keeps image corners rounded if card has border-radius */
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Image Container */
+  .service-card-img {
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+    overflow: hidden;
+    background-color: var(--line, #e2e2e2); /* Fallback placeholder color before image loads */
+  }
+
+  .service-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  /* Hover Zoom Effect */
+  .service-card:hover .service-card-img img {
+    transform: scale(1.05);
+  }
+
+  /* Inner Body Padding Adjustment (if needed) */
+  .service-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  /* Hide images on tablets/mobile screens */
+  @media (max-width: 768px) {
+    .service-card-img {
+      display: none;
+    }
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-section{background:var(--forest-950);color:var(--cream-50);}
+  .projects-section .section-head p{color:var(--cream-100);opacity:.78;}
+  .projects-section .eyebrow{color:var(--sage-300);}
+  .project-scroll{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:26px;
+  }
+  .project-card{
+    background:var(--forest-900);border:1px solid var(--line-light);border-radius:2px;overflow:hidden;
+    transition:transform .35s ease;
+  }
+  .project-card:nth-child(2){transform:translateY(30px);}
+  .project-card:hover{transform:translateY(-6px);}
+  .project-card:nth-child(2):hover{transform:translateY(24px);}
+  .project-visual{
+    aspect-ratio:4/3;position:relative;overflow:hidden;
+    background:linear-gradient(160deg,var(--forest-800),var(--forest-950));
+  }
+  .project-visual svg{width:100%;height:100%;}
+  .project-tag{
+    position:absolute;top:14px;left:14px;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:0.1em;text-transform:uppercase;background:rgba(20,23,26,0.75);
+    color:var(--sage-300);padding:5px 10px;border:1px solid var(--line-light);
+  }
+  .project-info{padding:22px 24px 26px;display:flex;justify-content:space-between;align-items:flex-end;}
+  .project-info .name{font-family:'Oswald',sans-serif;font-size:19px;margin-bottom:6px;}
+  .project-info .loc{font-size:12px;color:var(--cream-100);opacity:.6;letter-spacing:0.03em;}
+  .project-info svg{width:15px;height:15px;color:var(--sage-500);}
+  .projects-footer{display:flex;justify-content:center;margin-top:56px;}
+
+  /* ---------- PROCESS TIMELINE (contour) ---------- */
+  .process-section{background:var(--cream-100);}
+  .timeline{position:relative;padding-top:20px;}
+  .timeline-line{
+    position:absolute;top:20px;left:0;right:0;height:1px;background:var(--line);
+  }
+  .timeline-items{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;}
+  .t-item{position:relative;padding-top:34px;}
+  .t-dot{
+    position:absolute;top:12px;left:0;width:17px;height:17px;border-radius:50%;
+    background:var(--cream-100);border:2px solid var(--sage-500);
+  }
+  .t-step{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sage-500);letter-spacing:0.08em;}
+  .t-title{font-family:'Oswald',sans-serif;font-size:19px;margin:10px 0 8px;font-weight:500;}
+  .t-desc{font-size:13.5px;line-height:1.6;color:var(--ink-600);}
+
+  /* ---------- ABOUT / RINGS ---------- */
+  .about-section{}
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:80px;align-items:center;}
+  .rings-visual{position:relative;aspect-ratio:1/1;max-width:440px;}
+  .about-copy h2{
+    font-family:'Oswald',sans-serif;font-weight:500;text-transform:uppercase;font-size:clamp(26px,3vw,40px);line-height:1.12;margin:16px 0 22px;letter-spacing:0.005em;
+  }
+  .about-copy h2 em{font-style:normal;color:var(--sage-500);font-weight:700;}
+  .about-copy p{font-size:15.5px;line-height:1.75;color:var(--ink-600);margin-bottom:16px;max-width:520px;}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:30px 40px;margin-top:36px;padding-top:32px;border-top:1px solid var(--line);max-width:520px;}
+  .about-stats b{display:block;font-family:'Oswald',sans-serif;font-size:32px;font-weight:500;color:var(--forest-800);}
+  .about-stats span{font-size:11.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-600);}
+
+/* ---------- QUOTE FORM ---------- */
+  .quote-section{background:var(--cream-100);}
+  .quote-form{max-width:760px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:22px;}
+  .form-field{display:flex;flex-direction:column;gap:8px;}
+  .form-field.full{margin-bottom:22px;}
+  .form-field label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--ink-600);
+  }
+  .form-field input,.form-field select,.form-field textarea{
+    font-family:'Inter',sans-serif;font-size:14.5px;padding:13px 16px;
+    border:1px solid var(--line);border-radius:2px;background:var(--cream-50);
+    color:var(--ink-900);outline:none;transition:border-color .2s ease;
+  }
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{
+    border-color:var(--sage-500);
+  }
+  .form-field textarea{resize:vertical;}
+
+  /* ---------- BOOKING ---------- */
+  .booking-section{background:var(--cream-50);}
+  .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+  .booking-calendar{border:1px solid var(--line);border-radius:2px;padding:26px;background:var(--cream-100);}
+  .cal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+  .cal-header span{font-family:'Oswald',sans-serif;font-size:17px;}
+  .cal-nav button{
+    background:none;border:1px solid var(--line);width:28px;height:28px;
+    border-radius:50%;cursor:pointer;font-size:14px;color:var(--ink-900);margin-left:6px;
+  }
+  .cal-daynames,.cal-dates{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;}
+  .cal-daynames span{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;
+    color:var(--ink-600);padding-bottom:10px;
+  }
+  .cal-dates span{
+    padding:9px 0;font-size:13.5px;color:var(--ink-900);border-radius:50%;cursor:pointer;
+  }
+  .cal-dates span.muted{color:var(--ink-600);opacity:.35;}
+  .cal-dates span.selected{background:var(--sage-500);color:var(--forest-950);font-weight:600;}
+  .booking-slots{display:flex;flex-direction:column;gap:18px;}
+  .slots-label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;
+    text-transform:uppercase;color:var(--ink-600);
+  }
+  .slot-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .slot{
+    padding:13px 10px;border:1px solid var(--line);border-radius:2px;background:var(--cream-50);
+    font-family:'Inter',sans-serif;font-size:13.5px;cursor:pointer;transition:all .2s ease;
+  }
+  .slot:hover{border-color:var(--sage-500);}
+  .slot.selected{background:var(--sage-500);border-color:var(--sage-500);color:var(--forest-950);font-weight:600;}
+  .booking-slots .btn{align-self:flex-start;margin-top:6px;}
+
+  @media(max-width:1000px){
+    .form-row{grid-template-columns:1fr;}
+    .booking-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- TESTIMONIAL / CTA BANNER ---------- */
+  .cta-banner{
+    background:linear-gradient(120deg,var(--wood-900),var(--wood-700) 60%, var(--wood-800));
+    color:var(--cream-50);position:relative;overflow:hidden;
+  }
+  .cta-inner{
+    display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;position:relative;z-index:2;
+  }
+  .cta-banner h2{
+    font-family:'Oswald',sans-serif;font-weight:500;text-transform:uppercase;font-size:clamp(26px,3.1vw,38px);max-width:640px;line-height:1.16;
+  }
+  .cta-banner h2 em{font-style:normal;font-weight:700;color:var(--sage-300);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--forest-950);color:var(--cream-100);padding:80px 0 0;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 0.8fr 0.8fr 0.8fr 1fr;gap:40px;padding-bottom:70px;border-bottom:1px solid var(--line-light);}
+  .footer-brand .brand{margin-bottom:18px;}
+  .footer-brand p{font-size:13.5px;line-height:1.7;opacity:.65;max-width:280px;}
+  .footer-col h4{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--sage-300);margin-bottom:18px;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .footer-col a{font-size:13.5px;opacity:.75;transition:opacity .2s;}
+  .footer-col a:hover{opacity:1;color:var(--sage-300);}
+  .footer-socials{display:flex;gap:10px;}
+  .footer-socials a{
+    width:34px;height:34px;border:1px solid var(--line-light);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .footer-socials a:hover{border-color:var(--sage-500);background:rgba(147,168,106,0.1);}
+  .footer-socials svg{width:14px;height:14px;}
+  .footer-bottom{
+    display:flex;justify-content:space-between;padding:26px 0;font-size:12px;opacity:.5;
+    font-family:'IBM Plex Mono',monospace;letter-spacing:0.02em;
+  }
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media(max-width:1000px){
+    .wrap{padding:0 24px;}
+    .nav-links{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-art{height:340px;margin-top:20px;}
+    .section-head{grid-template-columns:1fr;gap:20px;}
+    .project-scroll{grid-template-columns:1fr;}
+    .project-card:nth-child(2),.project-card:nth-child(2):hover{transform:none;}
+    .service-row{grid-template-columns:50px 1fr;}
+    .service-desc{grid-column:2/3;max-width:100%;}
+    .service-arrow{display:none;}
+    .timeline-items{grid-template-columns:1fr 1fr;}
+    .about-grid{grid-template-columns:1fr;gap:50px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .cta-inner{flex-direction:column;align-items:flex-start;}
+  }
+  @media(max-width:560px){
+    section{padding:80px 0;}
+    .hero{padding:130px 0 70px;}
+    .hero-stats{flex-wrap:wrap;row-gap:20px;}
+    .timeline-items{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  /* ---------- NAV: DROPDOWN / MEGA MENU ---------- */
+  .nav-links{align-items:center;}
+  .nav-item{position:relative;}
+  .nav-item > a{display:flex;align-items:center;gap:6px;}
+  .nav-caret{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
+  .nav-item:hover .nav-caret{transform:rotate(180deg);}
+  .mega-dropdown{
+    position:absolute;top:calc(100% + 22px);left:50%;transform:translateX(-50%) translateY(6px);
+    width:620px;background:var(--cream-50);border:1px solid var(--line);border-radius:3px;
+    box-shadow:0 24px 60px rgba(18,26,15,0.18);
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .22s ease, transform .22s ease, visibility .22s;
+    z-index:200;
+  }
+  .nav-item:hover .mega-dropdown{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+  .mega-col{padding:26px 22px;border-right:1px solid var(--line);}
+  .mega-col:last-child{border-right:none;}
+  .mega-col-title{
+    display:block;font-family:'Oswald',sans-serif;font-size:15.5px;font-weight:600;color:var(--ink-900);
+    margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line);text-transform:none;letter-spacing:0;
+  }
+  .mega-col-title:hover{color:var(--sage-500);}
+  .mega-col ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .mega-col ul a{
+    font-size:12.5px;font-weight:400;text-transform:none;letter-spacing:0.01em;color:var(--ink-600);
+  }
+  .mega-col ul a:hover{color:var(--forest-800);}
+  .mega-col ul a::after{display:none;}
+  .simple-dropdown{
+    position:absolute;top:calc(100% + 22px);left:0;min-width:220px;background:var(--cream-50);
+    border:1px solid var(--line);border-radius:3px;box-shadow:0 24px 60px rgba(18,26,15,0.18);
+    padding:18px 20px;opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .22s ease, transform .22s ease;transform:translateY(6px);z-index:200;
+  }
+  .nav-item:hover .simple-dropdown{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);}
+  .simple-dropdown ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .simple-dropdown ul a{font-size:12.5px;text-transform:none;color:var(--ink-600);}
+  .simple-dropdown ul a:hover{color:var(--forest-800);}
+  .simple-dropdown ul a::after{display:none;}
+
+  .mobile-toggle{display:none;background:none;border:none;cursor:pointer;width:26px;height:20px;position:relative;}
+  .mobile-toggle span{
+    position:absolute;left:0;right:0;height:1.6px;background:var(--cream-50);transition:all .25s ease;
+  }
+  header.scrolled .mobile-toggle span{background:var(--ink-900);}
+  .mobile-toggle span:nth-child(1){top:0;}
+  .mobile-toggle span:nth-child(2){top:9px;}
+  .mobile-toggle span:nth-child(3){top:18px;}
+  .mobile-toggle.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+  .mobile-toggle.open span:nth-child(2){opacity:0;}
+  .mobile-toggle.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+
+  .mobile-nav{
+    display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;
+    background:var(--cream-50);padding:110px 28px 40px;overflow-y:auto;
+    transform:translateY(-100%);transition:transform .35s ease;
+  }
+  .mobile-nav.open{transform:translateY(0);}
+  .mobile-nav-group{border-bottom:1px solid var(--line);padding:16px 0;}
+  .mobile-nav-group > a{
+    font-family:'Oswald',sans-serif;font-size:19px;color:var(--ink-900);display:block;
+  }
+  .mobile-nav-sub{margin-top:14px;display:none;flex-direction:column;gap:16px;padding-left:4px;}
+  .mobile-nav-sub.open{display:flex;}
+  .mobile-nav-sub b{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:0.08em;color:var(--sage-500);margin-bottom:8px;
+  }
+  .mobile-nav-sub ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:4px;}
+  .mobile-nav-sub ul a{font-size:14px;color:var(--ink-600);}
+
+  /* ---------- SERVICE OVERVIEW CARDS ---------- */
+  .service-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .service-card{
+    border:1px solid var(--line);border-radius:3px;padding:34px 30px;background:var(--cream-50);
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .service-card:hover{border-color:var(--sage-500);transform:translateY(-4px);}
+  .service-card .service-icon{width:38px;height:38px;color:var(--sage-500);margin-bottom:22px;}
+  .service-card h3{font-family:'Oswald',sans-serif;font-size:22px;font-weight:500;margin-bottom:12px;}
+  .service-card p{font-size:14px;line-height:1.65;color:var(--ink-600);margin-bottom:22px;}
+  .service-card a{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:0.07em;
+    color:var(--forest-800);display:inline-flex;align-items:center;gap:8px;
+  }
+  .service-card a svg{width:12px;height:12px;}
+
+  /* ---------- SERVICE DETAIL BLOCKS ---------- */
+  .service-detail{border-top:1px solid var(--line);}
+  .service-detail:nth-of-type(odd){background:var(--cream-100);}
+  .service-detail-head{max-width:640px;margin-bottom:60px;}
+  .service-detail-head h2{
+    font-family:'Oswald',sans-serif;font-weight:500;text-transform:uppercase;font-size:clamp(28px,3.2vw,42px);line-height:1.1;margin-top:14px;
+  }
+  .service-detail-head h2 em{font-style:normal;color:var(--sage-500);font-weight:700;}
+  .service-detail-head p{font-size:15px;line-height:1.7;color:var(--ink-600);margin-top:16px;}
+  .subblock{padding-top:56px;border-top:1px solid var(--line);margin-top:56px;}
+  .subblock:first-of-type{padding-top:0;border-top:none;margin-top:0;}
+  .subblock-label{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:0.1em;
+    color:var(--sage-500);margin-bottom:14px;
+  }
+  .subblock h3{font-family:'Oswald',sans-serif;font-size:24px;font-weight:500;margin-bottom:14px;}
+  .subblock p{font-size:14.5px;line-height:1.7;color:var(--ink-600);max-width:640px;}
+
+  .steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:24px;}
+  .steps-row .step{border:1px solid var(--line);border-radius:3px;padding:22px 20px;background:var(--cream-50);}
+  .steps-row .step b{
+    display:block;font-family:'IBM Plex Mono',monospace;font-style:normal;font-weight:600;letter-spacing:0.05em;color:var(--sage-500);font-size:13px;margin-bottom:10px;
+  }
+  .steps-row .step span{font-size:13.5px;line-height:1.55;color:var(--ink-600);}
+
+  .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px;}
+  .gallery-tile{
+    aspect-ratio:4/3;border-radius:3px;border:1px solid var(--line);overflow:hidden;position:relative;
+    background:linear-gradient(155deg,var(--sage-300),var(--sage-500));display:flex;align-items:center;justify-content:center;
+  }
+  .gallery-tile svg{width:34%;height:34%;color:var(--cream-50);opacity:.85;}
+  .gallery-tile span{
+    position:absolute;bottom:10px;left:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    color:var(--cream-50);letter-spacing:0.05em;text-transform:uppercase;text-shadow:0 1px 4px rgba(0,0,0,0.3);
+  }
+  .gallery-note{font-size:12px;color:var(--ink-600);opacity:.6;margin-top:14px;font-style:italic;}
+
+  .range-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;}
+  .range-card{border:1px solid var(--line);border-radius:3px;padding:26px 24px;background:var(--cream-50);}
+  .range-card .tier{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--sage-500);
+  }
+  .range-card .price{font-family:'Oswald',sans-serif;font-size:28px;margin:12px 0 10px;}
+  .range-card .price small{font-size:13px;font-family:'Inter',sans-serif;color:var(--ink-600);font-weight:400;}
+  .range-card p{font-size:13px;line-height:1.6;color:var(--ink-600);}
+
+  .calc-box{
+    max-width:640px;border:1px solid var(--line);border-radius:3px;background:var(--cream-50);
+    padding:30px 32px;margin-top:24px;
+  }
+  .calc-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+  .calc-field{display:flex;flex-direction:column;gap:8px;}
+  .calc-field label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-600);
+  }
+  .calc-field input,.calc-field select{
+    font-family:'Inter',sans-serif;font-size:14px;padding:12px 14px;border:1px solid var(--line);border-radius:2px;
+    background:var(--cream-100);color:var(--ink-900);outline:none;
+  }
+  .calc-field input:focus,.calc-field select:focus{border-color:var(--sage-500);}
+  .calc-result{
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    padding-top:20px;border-top:1px solid var(--line);
+  }
+  .calc-result .estimate{font-family:'Oswald',sans-serif;font-size:15px;color:var(--ink-600);}
+  .calc-result .estimate b{font-size:26px;color:var(--forest-800);display:block;font-family:'Oswald',sans-serif;}
+  .calc-note{font-size:11.5px;color:var(--ink-600);opacity:.6;margin-top:14px;}
+
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:26px;}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews-section{background:var(--forest-950);color:var(--cream-50);}
+  .reviews-section .eyebrow{color:var(--sage-300);}
+  .reviews-section .section-head p{color:var(--cream-100);opacity:.78;}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .review-card{
+    background:var(--forest-900);border:1px solid var(--line-light);border-radius:3px;padding:30px 28px;
+  }
+  .review-stars{color:var(--sage-300);font-size:14px;letter-spacing:2px;margin-bottom:18px;}
+  .review-quote{font-family:'Oswald',sans-serif;font-weight:300;font-size:17px;font-style:normal;line-height:1.5;margin-bottom:22px;}
+  .review-author{font-size:12.5px;color:var(--cream-100);opacity:.65;}
+  .review-author b{color:var(--cream-50);opacity:1;font-weight:600;}
+
+  /* ---------- PROJECT FILTER TABS ---------- */
+  .project-filter-tabs{display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap;}
+  .filter-tab{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:0.06em;
+    padding:10px 18px;border:1px solid var(--line-light);border-radius:20px;color:var(--cream-100);
+    background:none;cursor:pointer;transition:all .2s ease;
+  }
+  .filter-tab.active,.filter-tab:hover{background:var(--sage-500);border-color:var(--sage-500);color:var(--forest-950);}
+  .project-card{display:block;}
+  .project-card.hidden-arm{display:none;}
+
+  /* ---------- ABOUT: STAFF + AWARDS ---------- */
+  .staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:50px;}
+  .staff-card{text-align:center;}
+  .staff-photo{
+    aspect-ratio:1/1;border-radius:50%;background:linear-gradient(155deg,var(--forest-800),var(--forest-950));
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+  }
+  .staff-photo span{font-family:'Oswald',sans-serif;font-size:32px;color:var(--sage-300);}
+  .staff-card .name{font-family:'Oswald',sans-serif;font-size:16.5px;margin-bottom:4px;}
+  .staff-card .role{font-size:12px;color:var(--ink-600);text-transform:uppercase;letter-spacing:0.05em;}
+  .staff-note{font-size:12px;color:var(--ink-600);opacity:.6;margin-top:20px;font-style:italic;}
+
+  .awards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:24px;}
+  .award-badge{
+    border:1px solid var(--line);border-radius:3px;padding:24px 18px;text-align:center;background:var(--cream-50);
+  }
+  .award-badge svg{width:30px;height:30px;color:var(--sage-500);margin:0 auto 14px;}
+  .award-badge .a-title{font-family:'Oswald',sans-serif;font-size:14.5px;margin-bottom:4px;}
+  .award-badge .a-year{font-size:11px;color:var(--ink-600);opacity:.7;font-family:'IBM Plex Mono',monospace;}
+
+  /* ---------- CONTACT: FORM + MAP ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 0.85fr;gap:50px;align-items:start;}
+  .map-embed{border:1px solid var(--line);border-radius:3px;overflow:hidden;height:100%;min-height:460px;}
+  .map-embed iframe{width:100%;height:100%;min-height:460px;border:0;display:block;}
+  .contact-details{display:flex;flex-direction:column;gap:16px;margin-top:26px;}
+  .contact-details a{
+    display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-900);
+  }
+  .contact-details svg{width:16px;height:16px;color:var(--sage-500);flex-shrink:0;}
+
+  @media(max-width:1000px){
+    .nav-links{display:none;}
+    .nav-cta .btn{display:none;}
+    .mobile-toggle{display:block;}
+    .mobile-nav{display:block;}
+    .service-cards{grid-template-columns:1fr;}
+    .steps-row{grid-template-columns:1fr 1fr;}
+    .gallery-grid{grid-template-columns:1fr 1fr;}
+    .range-cards{grid-template-columns:1fr;}
+    .calc-row{grid-template-columns:1fr;}
+    .review-grid{grid-template-columns:1fr;}
+    .staff-grid{grid-template-columns:1fr 1fr;}
+    .awards-grid{grid-template-columns:1fr 1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media(max-width:560px){
+    .steps-row{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:1fr 1fr;}
+    .staff-grid{grid-template-columns:1fr 1fr;}
+    .awards-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="brand">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+          <path d="M20 4L36 16V36H24V24H16V36H4V16L20 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+          <path d="M20 4L20 12" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="20" cy="3" r="1.6" fill="#f2670c"/>
+        </svg>
+        <span class="brand-text">
+          <span class="name">ISLAND WOODS</span><br>
+          <span class="sub">&amp; Development</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#top">Home</a></li>
+        <li class="nav-item">
+          <a href="#services">Services
+            <svg class="nav-caret" viewBox="0 0 10 10" fill="none"><path d="M1.5 3L5 6.5L8.5 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="mega-dropdown">
+            <div class="mega-col">
+              <a href="#service-scaffolding" class="mega-col-title">Scaffolding Rental</a>
+              <ul>
+                <li><a href="#scaffolding-how">How That Works</a></li>
+                <li><a href="#scaffolding-gallery">Gallery</a></li>
+                <li><a href="#scaffolding-price">Price Range</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <a href="#service-roofing" class="mega-col-title">Roofing Membranes</a>
+              <ul>
+                <li><a href="#roofing-how">How That Works</a></li>
+                <li><a href="#roofing-cost">Cost Range</a></li>
+                <li><a href="#roofing-gallery">Gallery</a></li>
+                <li><a href="#roofing-calculator">Quote Calculator</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <a href="#service-construction" class="mega-col-title">Construction</a>
+              <ul>
+                <li><a href="#construction-process">Process</a></li>
+                <li><a href="#construction-gallery">Project Gallery</a></li>
+                <li><a href="#construction-quote">Get a Quote</a></li>
+                <li><a href="#construction-booking">Book a Site Visit</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li><a href="#reviews">Reviews &amp; Testimonials</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About Us</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-primary">Request a Quote
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-group"><a href="#top">Home</a></div>
+  <div class="mobile-nav-group">
+    <a href="#services" id="mobileServicesToggle">Services</a>
+    <div class="mobile-nav-sub" id="mobileServicesSub">
+      <div>
+        <b>Scaffolding Rental</b>
+        <ul>
+          <li><a href="#scaffolding-how">How That Works</a></li>
+          <li><a href="#scaffolding-gallery">Gallery</a></li>
+          <li><a href="#scaffolding-price">Price Range</a></li>
+        </ul>
+      </div>
+      <div>
+        <b>Roofing Membranes</b>
+        <ul>
+          <li><a href="#roofing-how">How That Works</a></li>
+          <li><a href="#roofing-cost">Cost Range</a></li>
+          <li><a href="#roofing-gallery">Gallery</a></li>
+          <li><a href="#roofing-calculator">Quote Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <b>Construction</b>
+        <ul>
+          <li><a href="#construction-process">Process</a></li>
+          <li><a href="#construction-gallery">Project Gallery</a></li>
+          <li><a href="#construction-quote">Get a Quote</a></li>
+          <li><a href="#construction-booking">Book a Site Visit</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-nav-group"><a href="#reviews">Reviews &amp; Testimonials</a></div>
+  <div class="mobile-nav-group"><a href="#projects">Projects</a></div>
+  <div class="mobile-nav-group"><a href="#contact">Contact</a></div>
+  <div class="mobile-nav-group"><a href="#about">About Us</a></div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:170px;">
+    <svg class="contour-field" viewBox="0 0 1200 700" preserveAspectRatio="xMaxYMid slice">
+      <g stroke="#ffb27a" stroke-opacity="0.14" fill="none">
+        <ellipse cx="1080" cy="330" rx="620" ry="560"/>
+        <ellipse cx="1080" cy="330" rx="520" ry="470"/>
+        <ellipse cx="1080" cy="330" rx="420" ry="380"/>
+        <ellipse cx="1080" cy="330" rx="320" ry="290"/>
+        <ellipse cx="1080" cy="330" rx="220" ry="200"/>
+      </g>
+    </svg>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy reveal in">
+          <div class="eyebrow hero-eyebrow">Kingston · Ocho Rios · Islandwide</div>
+          <h1>Rooted in the<br>island. Building <br><em>Better Solutions.</em></h1>
+          <p class="lede">Island Woods & Development delivers end-to-end civil works, building construction, equipment rentals, and procurement. Registered in 2001, we bring two decades of trusted engineering excellence across Jamaica and beyond.</p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View Our Work
+              <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#contact" class="btn btn-outline-light">Start a Project</a>
+          </div>
+          <div class="hero-stats">
+            <div><b class="stat-number" data-target="11">0</b><span>Years Building</span></div>
+            <div><b class="stat-number" data-target="150" data-suffix="+">0</b><span>Projects Delivered</span></div>
+            <div><b class="stat-number" data-target="14">0</b><span>Parishes Served</span></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>North East Regional Health Authority</span>
+      <span>Ministry of Local Government</span>
+      <span>Urban Rural Township Program / NWA</span>
+      <span>National Irrigation Commission</span>
+      <span>HEART Trust / NTA</span>
+      <span>Epic Hardware</span>
+      <span>Ministry of Agriculture</span>
+      <span>Ministry of Health</span>
+      <span>Southern Region Health Authority</span>
+      <span>USAID / Devtech System Inc.</span>
+      <span>USAID / PADCO</span>
+      <span>SERHA – Ministry of Health</span>
+      <span>National Water Commission</span>
+      <span>Factories Corporation of Jamaica</span>
+      <span>Ministry of Local Government, Community Development & Sports</span>
+      <span>Ministry of Education</span>
+      <span>University of Technology</span>
+      <span>Island Woods and Development</span>
+      <span>National Works Agency</span>
+      <span>Airport Authority of Jamaica Ltd</span>
+      <span>Ministry of Agriculture - FAO</span>
+      <span>IICA – Ministry of Agriculture</span>
+      <span>Sport Development Foundation</span>
+      <span>Joint Venture Island Woods & Dev / Chris Honeywell</span>
+      <span>Devon House Development Ltd</span>
+      <span>Overseas Examination Commission</span>
+      <span>Fiscal Services Ltd</span>
+      <span>Jamaica Property Co. Ltd.</span>
+      <span>Sagicor Property</span>
+      <span>JMMB</span>
+      <span>University of the West Indies</span>
+      <span>Moon Palace Jamaica Grande</span>
+      <span>Moby Dick Restaurant</span>
+      <span>Morant Bay Parish Council</span>
+      <span>Morant Bay Tax Office</span>
+      <span>Laparkan Shipping Company</span>
+      <span>St Thomas Parish Council</span>
+    </div>
+  </div>
+
+  <!-- SERVICES OVERVIEW -->
+  <section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">What We Do</div>
+        <h2 class="reveal">Three arms.<br>One <em>reliable</em> crew.</h2>
+      </div>
+      <p class="reveal">From scaffolding you can rent by the week, to roofing membranes that shrug off island weather, to full builds start-to-finish — one company handles it all.</p>
+    </div>
+
+    <div class="service-cards reveal">
+      
+      <!-- CARD 1 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="scaffolding-service-card.png" alt="Scaffolding Rental" loading="lazy">
+        </div>
+        <div class="service-card-body">
+          <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="7" y="6" width="26" height="28"/><line x1="7" y1="15" x2="33" y2="15"/><line x1="7" y1="24" x2="33" y2="24"/><line x1="14" y1="6" x2="14" y2="34"/><line x1="26" y1="6" x2="26" y2="34"/></svg>
+          <h3>Scaffolding Rental</h3>
+          <p>Certified scaffold systems for residential and commercial jobs, delivered, erected, and struck by our own crew.</p>
+          <a href="#service-scaffolding">Explore Scaffolding
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="membrane-service-card.png" alt="Roofing Membranes" loading="lazy">
+        </div>
+        <div class="service-card-body">
+          <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 14L20 6L35 14V16H5V14Z"/><line x1="8" y1="16" x2="8" y2="32"/><line x1="14" y1="16" x2="14" y2="32"/><line x1="20" y1="16" x2="20" y2="32"/><line x1="26" y1="16" x2="26" y2="32"/><line x1="32" y1="16" x2="32" y2="32"/><line x1="5" y1="32" x2="35" y2="32"/></svg>
+          <h3>Roofing Membranes</h3>
+          <p>Waterproof membrane roofing built for tropical rain and sun — installed with a workmanship warranty.</p>
+          <a href="#service-roofing">Explore Roofing
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="construction-service-card.png" alt="Construction" loading="lazy">
+        </div>
+        <div class="service-card-body">
+          <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 20L20 8L34 20"/><rect x="10" y="20" width="20" height="13"/><rect x="17" y="24" width="6" height="9"/></svg>
+          <h3>Construction</h3>
+          <p>Design, build, and handover for homes and commercial spaces — one accountable team, start to finish.</p>
+          <a href="#service-construction">Explore Construction
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- SERVICE DETAIL: SCAFFOLDING RENTAL -->
+  <section id="service-scaffolding" class="service-detail">
+    <div class="wrap">
+      <div class="service-detail-head reveal">
+        <div class="eyebrow">Service — 01</div>
+        <h2>Scaffolding <em>Rental.</em></h2>
+        <p>Weekly and monthly scaffold rental for builders, contractors, and homeowners — delivered, assembled, and inspected by our own riggers.</p>
+      </div>
+
+      <div class="subblock reveal" id="scaffolding-how">
+        <div class="subblock-label">How That Works</div>
+        <h3>Four steps, no guesswork.</h3>
+        <p>Tell us the job — height, footprint, duration — and we handle transport, assembly, and safety sign-off.</p>
+        <div class="steps-row">
+          <div class="step"><b>01</b><span>Call or submit a request with your site dimensions and rental dates.</span></div>
+          <div class="step"><b>02</b><span>We confirm a scaffold plan and schedule delivery to your site.</span></div>
+          <div class="step"><b>03</b><span>Our riggers erect and safety-tag the structure before you start work.</span></div>
+          <div class="step"><b>04</b><span>When the job's done, we strike it down and collect on schedule.</span></div>
+        </div>
+      </div>
+
+      <div class="subblock reveal" id="scaffolding-gallery">
+        <div class="subblock-label">Gallery</div>
+        <h3>Scaffold builds on-site.</h3>
+        <div class="gallery-grid">
+          <div class="gallery-tile"><span>Residential Build</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="4" y1="16" x2="20" y2="16"/><line x1="10" y1="4" x2="10" y2="20"/></svg></div>
+          <div class="gallery-tile"><span>Commercial Facade</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="4" y1="16" x2="20" y2="16"/><line x1="10" y1="4" x2="10" y2="20"/></svg></div>
+          <div class="gallery-tile"><span>High-Rise Access</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="4" y1="16" x2="20" y2="16"/><line x1="10" y1="4" x2="10" y2="20"/></svg></div>
+          <div class="gallery-tile"><span>Delivery Crew</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="4" y1="16" x2="20" y2="16"/><line x1="10" y1="4" x2="10" y2="20"/></svg></div>
+        </div>
+        <p class="gallery-note">Placeholder tiles — swap in real jobsite photos here.</p>
+      </div>
+
+      <div class="subblock reveal" id="scaffolding-price">
+        <div class="subblock-label">Price Range</div>
+        <h3>Typical rental rates.</h3>
+        <p>Exact pricing depends on height, footprint, and rental length — here's a general guide.</p>
+        <div class="range-cards">
+          <div class="range-card">
+            <div class="tier">Small Job</div>
+            <div class="price">$8,000<small>&nbsp;/ week</small></div>
+            <p>Single-storey home repairs, painting, or small facade work.</p>
+          </div>
+          <div class="range-card">
+            <div class="tier">Standard Job</div>
+            <div class="price">$18,000<small>&nbsp;/ week</small></div>
+            <p>Two to three-storey builds and mid-size commercial fronts.</p>
+          </div>
+          <div class="range-card">
+            <div class="tier">Large Job</div>
+            <div class="price">$35,000+<small>&nbsp;/ week</small></div>
+            <p>Multi-storey or extended-duration commercial and industrial jobs.</p>
+          </div>
+        </div>
+        <p class="calc-note">All prices in JMD, estimates only — request a firm quote for your exact site.</p>
+        <div class="cta-row">
+          <a href="#contact" class="btn btn-primary">Request Scaffolding Quote
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE DETAIL: ROOFING MEMBRANES -->
+  <section id="service-roofing" class="service-detail">
+    <div class="wrap">
+      <div class="service-detail-head reveal">
+        <div class="eyebrow">Service — 02</div>
+        <h2>Roofing <em>Membranes.</em></h2>
+        <p>Waterproof torch-on and liquid-applied membrane systems for flat and low-slope roofs, built to handle heavy island rain.</p>
+      </div>
+
+      <div class="subblock reveal" id="roofing-how">
+        <div class="subblock-label">How That Works</div>
+        <h3>Inspect, prep, seal, warranty.</h3>
+        <p>Every roofing job starts with an on-site inspection so we can recommend the right membrane for your roof deck and drainage.</p>
+        <div class="steps-row">
+          <div class="step"><b>01</b><span>We inspect the existing roof deck, drainage, and any leak history.</span></div>
+          <div class="step"><b>02</b><span>We recommend a membrane type and share a written estimate.</span></div>
+          <div class="step"><b>03</b><span>Our crew strips, preps, and seals the roof deck edge to edge.</span></div>
+          <div class="step"><b>04</b><span>You get a signed workmanship warranty and care guide.</span></div>
+        </div>
+      </div>
+
+      <div class="subblock reveal" id="roofing-cost">
+        <div class="subblock-label">Cost Range</div>
+        <h3>What roofs typically run.</h3>
+        <p>Cost depends on membrane type, roof condition, and square footage — here's a general guide per square foot.</p>
+        <div class="range-cards">
+          <div class="range-card">
+            <div class="tier">Modified Bitumen</div>
+            <div class="price">$450<small>&nbsp;/ sq ft</small></div>
+            <p>Budget-friendly torch-on system, solid for most residential roofs.</p>
+          </div>
+          <div class="range-card">
+            <div class="tier">TPO Membrane</div>
+            <div class="price">$650<small>&nbsp;/ sq ft</small></div>
+            <p>Reflective, energy-efficient — a strong middle-tier option.</p>
+          </div>
+          <div class="range-card">
+            <div class="tier">EPDM Rubber</div>
+            <div class="price">$800<small>&nbsp;/ sq ft</small></div>
+            <p>Longest-lasting option, best for commercial and heavy-traffic roofs.</p>
+          </div>
+        </div>
+        <p class="calc-note">All prices in JMD, estimates only — final pricing follows an on-site inspection.</p>
+      </div>
+
+      <div class="subblock reveal" id="roofing-gallery">
+        <div class="subblock-label">Gallery</div>
+        <h3>Completed roofing jobs.</h3>
+        <div class="gallery-grid">
+          <div class="gallery-tile"><span>Flat Roof Seal</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8L12 3L21 8"/><line x1="3" y1="8" x2="3" y2="18"/><line x1="21" y1="8" x2="21" y2="18"/><line x1="3" y1="18" x2="21" y2="18"/></svg></div>
+          <div class="gallery-tile"><span>Membrane Install</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8L12 3L21 8"/><line x1="3" y1="8" x2="3" y2="18"/><line x1="21" y1="8" x2="21" y2="18"/><line x1="3" y1="18" x2="21" y2="18"/></svg></div>
+          <div class="gallery-tile"><span>Commercial Roof</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8L12 3L21 8"/><line x1="3" y1="8" x2="3" y2="18"/><line x1="21" y1="8" x2="21" y2="18"/><line x1="3" y1="18" x2="21" y2="18"/></svg></div>
+          <div class="gallery-tile"><span>Detail Sealing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8L12 3L21 8"/><line x1="3" y1="8" x2="3" y2="18"/><line x1="21" y1="8" x2="21" y2="18"/><line x1="3" y1="18" x2="21" y2="18"/></svg></div>
+        </div>
+        <p class="gallery-note">Placeholder tiles — swap in real jobsite photos here.</p>
+      </div>
+
+      <div class="subblock reveal" id="roofing-calculator">
+        <div class="subblock-label">Quote Calculator</div>
+        <h3>Get a rough estimate.</h3>
+        <p>Enter your roof's approximate area and pick a membrane type for an instant ballpark figure.</p>
+        <div class="calc-box">
+          <div class="calc-row">
+            <div class="calc-field">
+              <label>Roof Area (sq ft)</label>
+              <input type="number" id="calcArea" placeholder="e.g. 1200" min="0">
+            </div>
+            <div class="calc-field">
+              <label>Membrane Type</label>
+              <select id="calcType">
+                <option value="450">Modified Bitumen — $450/sq ft</option>
+                <option value="650">TPO Membrane — $650/sq ft</option>
+                <option value="800">EPDM Rubber — $800/sq ft</option>
+              </select>
+            </div>
+          </div>
+          <div class="calc-result">
+            <div class="estimate">Estimated cost<b id="calcResult">$0</b></div>
+            <button type="button" class="btn btn-primary" onclick="calculateRoofQuote()">Calculate
+              <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="calc-note">Ballpark figure only, in JMD — request a formal quote for exact pricing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE DETAIL: CONSTRUCTION -->
+  <section id="service-construction" class="service-detail">
+    <div class="wrap">
+      <div class="service-detail-head reveal">
+        <div class="eyebrow">Service — 03</div>
+        <h2>Construction.</h2>
+        <p>Full design-build services for residential and commercial projects — our own crews, one point of accountability, start to finish.</p>
+      </div>
+
+      <div class="subblock reveal" id="construction-process">
+        <div class="subblock-label">Process</div>
+        <h3>Five stages, one steady hand.</h3>
+        <p>A clear, fixed sequence so you always know what's next and who's responsible for it.</p>
+        <div class="timeline" style="margin-top:24px;">
+          <div class="timeline-line"></div>
+          <div class="timeline-items">
+            <div class="t-item"><span class="t-dot"></span><div class="t-step">Stage 01</div><div class="t-title">Consult</div><div class="t-desc">We visit the site, hear your goals, and scope the budget honestly.</div></div>
+            <div class="t-item"><span class="t-dot"></span><div class="t-step">Stage 02</div><div class="t-title">Design</div><div class="t-desc">Drawings, materials, and permitting handled before ground breaks.</div></div>
+            <div class="t-item"><span class="t-dot"></span><div class="t-step">Stage 03</div><div class="t-title">Build</div><div class="t-desc">Our own crews on site, with weekly progress updates you can see.</div></div>
+            <div class="t-item"><span class="t-dot"></span><div class="t-step">Stage 04</div><div class="t-title">Finish</div><div class="t-desc">Final walkthrough, punch-list, and quality sign-off together.</div></div>
+            <div class="t-item"><span class="t-dot"></span><div class="t-step">Stage 05</div><div class="t-title">Handover</div><div class="t-desc">Keys, warranties, and a maintenance guide — the legacy is yours.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subblock reveal" id="construction-gallery">
+        <div class="subblock-label">Project Gallery</div>
+        <h3>Recent construction work.</h3>
+        <div class="gallery-grid">
+          <div class="gallery-tile"><span>Kingston Residence</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10L12 4L21 10V20H3V10Z"/></svg></div>
+          <div class="gallery-tile"><span>Sovereign Centre</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10L12 4L21 10V20H3V10Z"/></svg></div>
+          <div class="gallery-tile"><span>Ocho Rios Villa</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10L12 4L21 10V20H3V10Z"/></svg></div>
+          <div class="gallery-tile"><span>Site in Progress</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10L12 4L21 10V20H3V10Z"/></svg></div>
+        </div>
+        <p class="gallery-note">Placeholder tiles — swap in real project photos here. See the full <a href="#projects" style="text-decoration:underline;">Projects</a> section for more.</p>
+      </div>
+
+      <div class="subblock reveal" id="construction-quote">
+        <div class="subblock-label">Get a Quote</div>
+        <h3>Ready to talk about your build?</h3>
+        <p>Share your project details and we'll follow up with a tailored quote — usually within one business day.</p>
+        <div class="cta-row">
+          <a href="#contact" class="btn btn-primary">Request a Construction Quote
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="subblock reveal" id="construction-booking">
+        <div class="subblock-label">Book a Site Visit</div>
+        <h3>Schedule a consultation.</h3>
+        <p>Pick a day and time that works for you — we'll come to you, walk the site, and talk through what's possible.</p>
+        <div class="booking-grid" style="margin-top:24px;">
+          <div class="booking-calendar">
+            <div class="cal-header">
+              <span>July 2026</span>
+              <div class="cal-nav"><button type="button">&#8249;</button><button type="button">&#8250;</button></div>
+            </div>
+            <div class="cal-daynames">
+              <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+            </div>
+            <div class="cal-dates">
+              <span class="muted">28</span><span class="muted">29</span><span class="muted">30</span><span>1</span><span>2</span><span>3</span><span>4</span>
+              <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+              <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+              <span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
+              <span>26</span><span>27</span><span>28</span><span class="selected">29</span><span>30</span><span>31</span><span class="muted">1</span>
+            </div>
+          </div>
+          <div class="booking-slots">
+            <span class="slots-label">Available Times — Wed, Jul 29</span>
+            <div class="slot-grid">
+              <button type="button" class="slot">9:00 AM</button>
+              <button type="button" class="slot">11:00 AM</button>
+              <button type="button" class="slot selected">1:00 PM</button>
+              <button type="button" class="slot">3:00 PM</button>
+              <button type="button" class="slot">4:30 PM</button>
+            </div>
+            <a href="#" class="btn btn-primary">Confirm Booking
+              <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS & TESTIMONIALS -->
+  <section id="reviews" class="reviews-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">What Clients Say</div>
+          <h2 class="reveal">Reviews &amp;<br><em>testimonials.</em></h2>
+        </div>
+        <p class="reveal">We measure success in repeat clients and referrals — here's some of what they've told us.</p>
+      </div>
+      <div class="review-grid">
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-quote">"They scaffolded our whole facade in a day and struck it down just as fast. Easy to deal with."</div>
+          <div class="review-author"><b>Marlon G.</b> — New Kingston, Commercial Client</div>
+        </div>
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-quote">"Our roof hasn't leaked once since they resealed it — even through hurricane season."</div>
+          <div class="review-author"><b>Andrea T.</b> — St. Ann, Residential Client</div>
+        </div>
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-quote">"Weekly updates, honest pricing, and they finished on the date they promised at the start."</div>
+          <div class="review-author"><b>Devon R.</b> — St. Andrew, Residential Client</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="projects-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Our Work</div>
+          <h2 class="reveal">Featured<br><em>Projects.</em></h2>
+        </div>
+        <p class="reveal">A selection of completed work across the island, separated by service arm — each one delivered by our own crews, start to finish.</p>
+      </div>
+
+      <div class="project-filter-tabs reveal">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="scaffolding">Scaffolding</button>
+        <button class="filter-tab" data-filter="roofing">Roofing</button>
+        <button class="filter-tab" data-filter="construction">Construction</button>
+      </div>
+
+      <div class="project-scroll" id="projectScroll">
+        <div class="project-card reveal" data-arm="construction">
+          <div class="project-visual">
+            <span class="project-tag">Construction · Residential</span>
+            <svg viewBox="0 0 400 300" width="100%" height="100%">
+              <g stroke="#ffb27a" stroke-opacity="0.5" stroke-width="1.2" fill="none">
+                <path d="M40 190L200 90L360 190"/>
+                <rect x="70" y="185" width="260" height="90"/>
+                <rect x="100" y="210" width="50" height="65"/>
+                <rect x="250" y="210" width="50" height="45"/>
+                <line x1="40" y1="275" x2="360" y2="275"/>
+              </g>
+            </svg>
+          </div>
+          <div class="project-info">
+            <div><div class="name">Kingston Residence</div><div class="loc">St. Andrew, Jamaica</div></div>
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-arm="construction">
+          <div class="project-visual">
+            <span class="project-tag">Construction · Commercial</span>
+            <svg viewBox="0 0 400 300" width="100%" height="100%">
+              <g stroke="#ffb27a" stroke-opacity="0.5" stroke-width="1.2" fill="none">
+                <rect x="120" y="60" width="160" height="215"/>
+                <line x1="140" y1="80" x2="140" y2="255"/>
+                <line x1="170" y1="80" x2="170" y2="255"/>
+                <line x1="200" y1="80" x2="200" y2="255"/>
+                <line x1="230" y1="80" x2="230" y2="255"/>
+                <line x1="260" y1="80" x2="260" y2="255"/>
+                <line x1="80" y1="275" x2="320" y2="275"/>
+              </g>
+            </svg>
+          </div>
+          <div class="project-info">
+            <div><div class="name">Sovereign Centre</div><div class="loc">New Kingston, Jamaica</div></div>
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-arm="construction">
+          <div class="project-visual">
+            <span class="project-tag">Construction · Residential</span>
+            <svg viewBox="0 0 400 300" width="100%" height="100%">
+              <g stroke="#ffb27a" stroke-opacity="0.5" stroke-width="1.2" fill="none">
+                <path d="M60 170L140 110H260L340 170"/>
+                <rect x="90" y="170" width="220" height="100"/>
+                <rect x="115" y="195" width="45" height="75"/>
+                <rect x="240" y="195" width="45" height="45"/>
+                <line x1="60" y1="270" x2="340" y2="270"/>
+              </g>
+            </svg>
+          </div>
+          <div class="project-info">
+            <div><div class="name">Ocho Rios Villa</div><div class="loc">St. Ann, Jamaica</div></div>
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-arm="scaffolding">
+          <div class="project-visual">
+            <span class="project-tag">Scaffolding</span>
+            <svg viewBox="0 0 400 300" width="100%" height="100%">
+              <g stroke="#ffb27a" stroke-opacity="0.5" stroke-width="1.2" fill="none">
+                <rect x="90" y="40" width="220" height="230"/>
+                <line x1="90" y1="90" x2="310" y2="90"/>
+                <line x1="90" y1="140" x2="310" y2="140"/>
+                <line x1="90" y1="190" x2="310" y2="190"/>
+                <line x1="90" y1="240" x2="310" y2="240"/>
+                <line x1="140" y1="40" x2="140" y2="270"/>
+                <line x1="200" y1="40" x2="200" y2="270"/>
+                <line x1="260" y1="40" x2="260" y2="270"/>
+              </g>
+            </svg>
+          </div>
+          <div class="project-info">
+            <div><div class="name">Half Way Tree Tower</div><div class="loc">Kingston, Jamaica</div></div>
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-arm="roofing">
+          <div class="project-visual">
+            <span class="project-tag">Roofing</span>
+            <svg viewBox="0 0 400 300" width="100%" height="100%">
+              <g stroke="#ffb27a" stroke-opacity="0.5" stroke-width="1.2" fill="none">
+                <path d="M40 100L200 40L360 100"/>
+                <rect x="40" y="100" width="320" height="150"/>
+                <line x1="40" y1="250" x2="360" y2="250"/>
+                <line x1="70" y1="110" x2="70" y2="245"/>
+                <line x1="330" y1="110" x2="330" y2="245"/>
+              </g>
+            </svg>
+          </div>
+          <div class="project-info">
+            <div><div class="name">Portmore Warehouse Reroof</div><div class="loc">St. Catherine, Jamaica</div></div>
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-arm="roofing">
+          <div class="project-visual">
+            <span class="project-tag">Roofing</span>
+            <svg viewBox="0 0 400 300" width="100%" height="100%">
+              <g stroke="#ffb27a" stroke-opacity="0.5" stroke-width="1.2" fill="none">
+                <path d="M60 110L200 55L340 110"/>
+                <rect x="60" y="110" width="280" height="140"/>
+                <line x1="60" y1="250" x2="340" y2="250"/>
+              </g>
+            </svg>
+          </div>
+          <div class="project-info">
+            <div><div class="name">Mandeville Villa Reseal</div><div class="loc">Manchester, Jamaica</div></div>
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="projects-footer">
+        <a href="#" class="btn btn-outline-light">View All Projects
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="quote-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Get In Touch</div>
+          <h2 class="reveal">Tell us about<br><em>your project.</em></h2>
+        </div>
+        <p class="reveal">Share a few details and we'll follow up with a tailored quote — usually within one business day.</p>
+      </div>
+
+      <div class="contact-grid">
+        <form class="quote-form reveal">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Full Name</label>
+              <input type="text" placeholder="Your name">
+            </div>
+            <div class="form-field">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="876-555-0123">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label>Email Address</label>
+              <input type="email" placeholder="you@email.com">
+            </div>
+            <div class="form-field">
+              <label>Service Needed</label>
+              <select>
+                <option>Scaffolding Rental</option>
+                <option>Roofing Membranes</option>
+                <option>Construction</option>
+                <option>Not Sure Yet</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-field full">
+            <label>Tell us about your project</label>
+            <textarea rows="4" placeholder="Location, budget range, timeline..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Request My Quote
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="contact-details">
+            <a href="tel:+18765550143">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h4l2 5-2.5 2a12 12 0 0 0 6 6l2-2.5 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2Z"/></svg>
+              +1 (876) 555‑0143
+            </a>
+            <a href="mailto:hello@islandwoodsdev.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              hello@islandwoodsdev.com
+            </a>
+            <a href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              12 Hope Road, Kingston
+            </a>
+          </div>
+        </form>
+
+        <div class="map-embed reveal">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15170.0!2d-76.7936!3d18.0136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8edb3fbf28fb9c11%3A0x1!2sHope+Road%2C+Kingston%2C+Jamaica!5e0!3m2!1sen!2sjm!4v1690000000000"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Island Woods & Development location map"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about-section">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="rings-visual reveal">
+          <svg viewBox="0 0 440 440" width="100%" height="100%">
+            <g fill="none" stroke="#2a3138" stroke-opacity="0.9">
+              <circle cx="220" cy="220" r="210" stroke-opacity="0.08"/>
+              <circle cx="220" cy="220" r="180" stroke-opacity="0.12"/>
+              <circle cx="220" cy="220" r="148" stroke-opacity="0.18"/>
+              <circle cx="220" cy="220" r="115" stroke-opacity="0.25"/>
+              <circle cx="220" cy="220" r="80" stroke-opacity="0.35"/>
+              <circle cx="220" cy="220" r="45" stroke="#f2670c" stroke-opacity="0.9" stroke-width="1.4"/>
+            </g>
+            <text x="220" y="212" text-anchor="middle" font-family="Oswald, sans-serif" font-size="46" fill="#1c2126">11</text>
+            <text x="220" y="238" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#55595e">YEARS OF GROWTH</text>
+          </svg>
+        </div>
+        <div class="about-copy reveal">
+          <div class="eyebrow">About Us</div>
+          <h2>Jamaican-owned.<br>Built on <em>integrity.</em></h2>
+          <p>Island Woods &amp; Development started with a single renovation crew in Kingston and grew, project by project, into an islandwide firm spanning scaffolding, roofing, and full construction — without ever losing the habits that got us here: showing up, finishing what we start, and pricing jobs honestly.</p>
+          <p>We pair local knowledge — of the land, the climate, the materials that hold up here — with modern building standards, so what we build stands up to island weather and island time.</p>
+          <div class="about-stats">
+            <div><b>150+</b><span>Projects Completed</span></div>
+            <div><b>98%</b><span>Client Retention</span></div>
+            <div><b>75+</b><span>Happy Clients</span></div>
+            <div><b>14</b><span>Parishes Served</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="staff-grid">
+        <div class="staff-card reveal">
+          <div class="staff-photo"><span>MC</span></div>
+          <div class="name">Marcus Campbell</div>
+          <div class="role">Founder &amp; Managing Director</div>
+        </div>
+        <div class="staff-card reveal">
+          <div class="staff-photo"><span>SR</span></div>
+          <div class="name">Simone Reid</div>
+          <div class="role">Operations Manager</div>
+        </div>
+        <div class="staff-card reveal">
+          <div class="staff-photo"><span>DW</span></div>
+          <div class="name">Damian Walker</div>
+          <div class="role">Site &amp; Scaffolding Lead</div>
+        </div>
+        <div class="staff-card reveal">
+          <div class="staff-photo"><span>KB</span></div>
+          <div class="name">Keisha Brown</div>
+          <div class="role">Roofing Supervisor</div>
+        </div>
+      </div>
+      <p class="staff-note">Placeholder avatars — swap in real staff photos here.</p>
+
+      <div class="subblock reveal" style="margin-top:70px;">
+        <div class="subblock-label">Awards &amp; Certifications</div>
+        <h3>Recognized standards.</h3>
+        <div class="awards-grid">
+          <div class="award-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><path d="M8 12.5L6 21l6-3 6 3-2-8.5"/></svg>
+            <div class="a-title">JIC Member</div>
+            <div class="a-year">Jamaica Institute of Construction</div>
+          </div>
+          <div class="award-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 3 6v6c0 5 4 8 9 10 5-2 9-5 9-10V6l-9-4Z"/></svg>
+            <div class="a-title">OSHA Scaffold Certified</div>
+            <div class="a-year">Crew safety certification</div>
+          </div>
+          <div class="award-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="1.5"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg>
+            <div class="a-title">Licensed Contractor</div>
+            <div class="a-year">Government of Jamaica</div>
+          </div>
+          <div class="award-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.4L12 14.6 7.1 17l.9-5.4-4-3.9 5.5-.8L12 2Z"/></svg>
+            <div class="a-title">Best Local Builder</div>
+            <div class="a-year">Kingston Business Awards, 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="wrap">
+      <div class="cta-inner">
+        <h2>Ready to build<br>something that <em>lasts?</em></h2>
+        <a href="mailto:hello@islandwoodsdev.com" class="btn btn-primary">Get In Touch
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+            <path d="M20 4L36 16V36H24V24H16V36H4V16L20 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+            <path d="M20 4L20 12" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="20" cy="3" r="1.6" fill="#f2670c"/>
+          </svg>
+          <span class="brand-text">
+            <span class="name">ISLAND WOODS</span><br>
+            <span class="sub">&amp; Development</span>
+          </span>
+        </a>
+        <p>A Jamaican-owned construction and development company, building homes and commercial spaces across all 14 parishes.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Sitemap</h4>
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#reviews">Reviews &amp; Testimonials</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#service-scaffolding">Scaffolding Rental</a></li>
+          <li><a href="#service-roofing">Roofing Membranes</a></li>
+          <li><a href="#service-construction">Construction</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+18765550143">+1 (876) 555‑0143</a></li>
+          <li><a href="mailto:hello@islandwoodsdev.com">hello@islandwoodsdev.com</a></li>
+          <li><a href="#">12 Hope Road, Kingston</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V12H8v3h2.5v6h3v-6H16l.5-3h-3V9.8c0-.6.4-.8.9-.8Z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="10" x2="8" y2="17"/><circle cx="8" cy="7" r="0.8" fill="currentColor"/><path d="M12 17v-4.5c0-1.5 1-2.5 2.5-2.5s2.5 1 2.5 2.5V17"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Island Woods &amp; Development. All rights reserved.</span>
+      <span>Kingston, Jamaica</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  /* Mobile nav toggle */
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  if (mobileToggle && mobileNav) {
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    const servicesToggle = document.getElementById('mobileServicesToggle');
+    const servicesSub = document.getElementById('mobileServicesSub');
+    servicesToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      servicesSub.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (a !== servicesToggle) {
+          mobileToggle.classList.remove('open');
+          mobileNav.classList.remove('open');
+        }
+      });
+    });
+  }
+
+  /* Roofing quote calculator */
+  function calculateRoofQuote() {
+    const area = parseFloat(document.getElementById('calcArea').value) || 0;
+    const rate = parseFloat(document.getElementById('calcType').value) || 0;
+    const total = area * rate;
+    document.getElementById('calcResult').textContent =
+      '$' + total.toLocaleString('en-JM', { maximumFractionDigits: 0 });
+  }
+
+  /* Project filter tabs */
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  const projectCards = document.querySelectorAll('#projectScroll .project-card');
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filterTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      projectCards.forEach(card => {
+        const show = filter === 'all' || card.dataset.arm === filter;
+        card.classList.toggle('hidden-arm', !show);
+      });
+    });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const stats = document.querySelectorAll(".stat-number");
+    const duration = 2000; // Animation duration in milliseconds (2 seconds)
+
+    const animateCount = (el) => {
+      const target = parseInt(el.getAttribute("data-target"), 10);
+      const suffix = el.getAttribute("data-suffix") || "";
+      const startTime = performance.now();
+
+      const updateCounter = (currentTime) => {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        
+        // Ease-out effect (starts fast, slows down at the end)
+        const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.floor(easeOutProgress * target);
+
+        el.textContent = currentValue + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          el.textContent = target + suffix; // Ensure final target value is exact
+        }
+      };
+
+      requestAnimationFrame(updateCounter);
+    };
+
+    // Use IntersectionObserver so the animation triggers only when visible
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          observerInstance.unobserve(entry.target); // Trigger only once
+        }
+      });
+    }, { threshold: 0.5 });
+
+    stats.forEach(stat => observer.observe(stat));
+  });
+</script>
+
+</body>
+</html>

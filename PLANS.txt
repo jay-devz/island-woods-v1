@@ -1,0 +1,91 @@
+Ok... so here are the things I plan to edit
+
+
+**SITE-WIDE**
+- FAVICON NOW!!
+- more animations... roll in reveals etc
+- add whatsapp integrations
+- integrate scaffolding poster
+- navbar dropdown menu doesn't work
+- comment out parts from menu that no longer exist like pricing
+- more colour contrast.. white sections kind of boring to look at. add sections similar to reviews section
+- more images of ppl smiling 
+- more construction images to match sections
+- maybe there are too many sections & too much content
+- some more box shadows and hover animations
+- a few rounded corners
+- vector images of cartoon people doing stuff... bonus points if animated
+- maybe put trust section higher? 
+- make form actually work
+- add mailto??
+- add tel:
+
+**HERO**
+
+- change tagline ✅
+- subtext to match client information✅
+- can we make stats into counter?✅
+- make marquee be names of previous clients ✅
+
+**SERVICES**
+- add picture for each service on wide screen✅
+- make entire service card clickable ✅
+- fix text✅
+
+
+**SCAFFOLDING RENTAL**
+- remove "Service 01" Heading ✅
+- fix text ✅
+- placeholder images for gallery ❌
+- vector images to steps ❌
+- remove filler pointer text ✅
+- remove prices (comment it out in case he wants that) ✅
+
+**ROOFING MEMBRANES**
+- remove "Service 02" Heading ✅
+- fix text✅
+- vector images to steps❌
+- comment out prices... ✅
+- add images of completed roofing jobs ❌
+- remove filler pointer text ✅
+- do we want to keep that ballpark subtext? ✅
+
+**CONSTRUCTION**
+- remove "Service 03" Heading ✅
+- fix text ✅
+- add vectors to steps❌
+- add images to gallery❌
+- remove filler pointer text✅
+
+**BOOKING CALENDAR**
+- comment out booking CALENDAR ✅
+- try making it not ugly❌
+
+**TESTIMONIALS**
+- fake images to reviews ❌
+
+**FEATURED PROJECTS**
+- fix text ✅
+- add real images ❌
+- names of real projects they did ✅
+
+**CONTACT**
+- make phone number real ✅
+- make address real ✅
+- point map embed to real location✅
+- make quote request form actually work ✅
+
+**ABOUT**
+- replace w real information
+- make stats into counters
+- maybe have image to the left instead of that weird tree thing
+- make staff cards have real staff names and initials
+- awards must have real names
+- make tree rings actually match years in business
+- make years be a counter
+- add animation to rings spreading out infinite
+
+**FOOTER**
+- text must be accurate
+- real phone number and address
+
